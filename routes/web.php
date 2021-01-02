@@ -59,7 +59,7 @@ Route::get('users', function (){
 Route::view('/form', 'form');
 
 Route::fallback(function (){
-    echo "<h1>Ooops! Seja muito bem vindo. Erro 404. Nada encontrado para esta rota.</h1>";
+    echo "<h1>Ooops! Seja muito bem vindo. Erro 404. Nada encontrado para esta rota. Por favor tente outra.</h1>";
 });
 
 Route::redirect('/users/add', url('/form'), 301);
