@@ -52,7 +52,7 @@ Route::any('/users', 'UserController@any');*/
 /*Route::resource('posts', 'PostController')->only(['index', 'show']);
 Route::resource('posts', 'PostController')->except()(['destroy']);*/
 
-Route::get('users', function (){
+/*Route::get('users', function (){
     echo "Listagem de Usuários!";
 });
 
@@ -65,6 +65,33 @@ Route::fallback(function (){
 Route::redirect('/users/add', url('/form'), 301);
 
 Route::get('/posts', 'PostController@index')->name('posts.index');
-Route::get('/posts/index', 'PostController@indexRedirect')->name('posts.indexRedirect');
+Route::get('/posts/index', 'PostController@indexRedirect')->name('posts.indexRedirect');*/
+
+//Route::get('/users/{id}/comments/{comments}', 'UserController@userComments')->where(['id' => '[0-9]+', 'comment' => '[a-zA-Z]']);
+
+//Route::get('/users/1', 'UserController@inspect')->name('inspect');
+
+//grupo de rotas
+/*Route::prefix('admin')->group(function () {
+    Route::view('/form', 'form');
+});
+
+Route::name('admin.posts.')->group(function () {
+    Route::get('/admin/posts/index', 'PostController@index')->name('index');
+    Route::get('/admin/posts', 'PostController@show')->name('show');
+});
+
+//bloqueia requisicoes acima de 10 em 1 minuto
+Route::middleware(['throttle:10,1'])->group(function () {
+    Route::view('/form', 'form');
+});
+
+Route::namespace('Admin')->group(function () {
+    Route::get('/users', 'UserController@index');
+});*/
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['throttle:10,1'], 'as' => 'admin.'], function () {
+    Route::resource('users', 'UserController');
+});
 
 
